@@ -41,7 +41,7 @@ for code in stock_code_list:
 # 合并并保存原始行情数据
 if raw_price_list:
     raw_price_df = pd.concat(raw_price_list, ignore_index=True)
-    raw_price_df.to_csv("raw_data/raw_行情数据.csv", index=False, encoding="utf-8-sig")
+    raw_price_df.to_csv("raw_data/raw_hs300_3年行情数据.csv", index=False, encoding="utf-8-sig")
     print(f"原始行情数据量：{raw_price_df.shape}")
 else:
     print("警告：未获取到任何行情数据！")
@@ -84,7 +84,7 @@ if raw_finance_list:
     if "股票代码" in raw_finance_df.columns:
         raw_finance_df = raw_finance_df[raw_finance_df["股票代码"].isin(stock_code_list)].copy()
     
-    raw_finance_df.to_csv("raw_data/raw_财务数据.csv", index=False, encoding="utf-8-sig")
+    raw_finance_df.to_csv("raw_data/raw_hs300_3年财务数据.csv", index=False, encoding="utf-8-sig")
     print(f"原始财务数据量：{raw_finance_df.shape}")
 else:
     print("警告：未获取到任何财务数据！")
@@ -161,7 +161,7 @@ if not raw_finance_df.empty:
             # 修复：原来的阈值(-10, 10)太严格，改为(-500, 500)
             finance_df = finance_df[(finance_df["营业总收入同比增长率"] > -500) & (finance_df["营业总收入同比增长率"] < 500)]
         
-        finance_df.to_csv("clean_data/clean_财务数据.csv", index=False, encoding="utf-8-sig")
+        finance_df.to_csv("clean_data/clean_hs300_3年财务数据.csv", index=False, encoding="utf-8-sig")
         print(f"清洗后财务数据量：{finance_df.shape}，财务数据清洗完成")
 else:
     print("无有效财务数据，跳过财务数据清洗")
